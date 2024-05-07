@@ -1,16 +1,14 @@
-import { Server } from "socket.io";
-import express from 'express';
+const { Server } = require("socket.io");
+const express = require('express');
+const http = require('http');
 
 const app = express()
-const port = 3000
+const server = http.createServer(app);
+const port = 80
 
-const io = new Server({ /* options */ });
+const io = new Server(server);
 app.get('/', (req, res) => {
   res.send('Hello World!')
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
 })
 
 io.on("connection", (socket) => {
@@ -34,4 +32,6 @@ io.on("connection", (socket) => {
     });
 });
 
-io.listen(3000);
+server.listen(port, () => {
+  console.log(`listening on *:${port}`);
+});

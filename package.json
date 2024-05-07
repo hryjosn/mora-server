@@ -2,11 +2,17 @@
   "name": "mora",
   "version": "1.0.0",
   "description": "mora_server",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "main": "index.js",
   "repository": "https://github.com/hryjosn/mora-server.git",
   "author": "KevinLai02 <jihn.smith629@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0",
     "socket.io": "^4.7.5"
   }
 }
