@@ -1,0 +1,12 @@
+{
+  "name": "mora",
+  "version": "1.0.0",
+  "description": "mora_server",
+  "main": "index.js",
+  "repository": "https://github.com/hryjosn/mora-server.git",
+  "author": "KevinLai02 <jihn.smith629@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "socket.io": "^4.7.5"
+  }
+}
