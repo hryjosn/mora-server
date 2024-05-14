@@ -14,8 +14,9 @@ app.get('/', (req, res) => {
 io.on("connection", (socket) => {
     console.log('connecting');
     socket.on("joinRoom", (res) => {
-        const {roomID} = res
+        const {roomID, userName} =res
         socket.join(roomID);
+        io.to(roomID).emit('joinRoom', {userName})
     });
     socket.on("onReady", (res) => {
         const {roomID, userName} = res
