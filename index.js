@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 io.on("connection", (socket) => {
     console.log('connecting');
     socket.on("joinRoom", (res) => {
-        const {roomID} =res
+        const {roomID} = res
         socket.join(roomID);
     });
     socket.on("onReady", (res) => {
