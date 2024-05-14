@@ -12,23 +12,22 @@ app.get('/', (req, res) => {
 })
 
 io.on("connection", (socket) => {
-    socket.on("createRoom", (res) => {
-        socket.join(res);
-    });
+    console.log('connecting');
     socket.on("joinRoom", (res) => {
-        socket.join(res);
+        const {roomID, userName} =res
+        socket.join(roomID, {userName});
     });
     socket.on("onReady", (res) => {
-        const {roomID} = res
-        io.to(roomID).emit('onReady')
+        const {roomID, userName} = res
+        io.to(roomID).emit('onReady', {roomID, userName})
     });
     socket.on("start", (res) => {
         const {roomID} = res
         io.to(roomID).emit('starting')
     });
     socket.on("mora", (res) => {
-        const {roomID, mora, userId} = res
-        io.to(roomID).emit({roomID, mora, userId})
+        const {roomID, mora, userName} = res
+        io.to(roomID).emit("mora", {roomID, mora, userName})
     });
 });
 
