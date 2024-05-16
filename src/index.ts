@@ -1,32 +1,37 @@
-const { Server } = require("socket.io");
-const express = require('express');
-const http = require('http');
+import { Request, Response } from 'express'
+import { Server } from 'socket.io'
+import express from "express"
+import http from 'http'
+import { ServerToClientEvents, ClientToServerEvents } from "./types"
 
 const app = express()
 const server = http.createServer(app);
 const port = 80
 
-const io = new Server(server);
-app.get('/', (req:any, res:any) => {
+const io = new Server<
+ClientToServerEvents, 
+ServerToClientEvents
+>(server);
+app.get('/', (req:Request, res:Response) => {
   res.send('Hello World!')
 })
 
-io.on("connection", (socket:any) => {
+io.on("connection", (socket) => {
     console.log('connecting');
-    socket.on("joinRoom", (res:any) => {
+    socket.on("joinRoom", (res) => {
         const {roomID, userName} =res
         socket.join(roomID);
         io.to(roomID).emit('joinRoom', {userName})
     });
-    socket.on("onReady", (res:any) => {
+    socket.on("onReady", (res) => {
         const {roomID, userName} = res
         io.to(roomID).emit('onReady', {roomID, userName})
     });
-    socket.on("start", (res:any) => {
+    socket.on("start", (res) => {
         const {roomID} = res
-        io.to(roomID).emit('starting')
+        io.to(roomID).emit('start', {message: 'starting'})
     });
-    socket.on("mora", (res:any) => {
+    socket.on("mora", (res) => {
         const {roomID, mora, userName} = res
         io.to(roomID).emit("mora", {roomID, mora, userName})
     });
