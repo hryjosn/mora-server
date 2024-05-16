@@ -1,6 +1,5 @@
-import { Request, Response } from 'express'
 import { Server } from 'socket.io'
-import express from "express"
+import express, { Request, Response } from "express"
 import http from 'http'
 import { ServerToClientEvents, ClientToServerEvents } from "./types"
 
