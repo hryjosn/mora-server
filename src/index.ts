@@ -1,8 +1,8 @@
-import { Server } from 'socket.io'
+import 'dotenv/config'
 import express, { Request, Response } from 'express'
 import http from 'http'
-import { ServerToClientEvents, ClientToServerEvents } from './types'
-import 'dotenv/config'
+import { Server } from 'socket.io'
+import { ClientToServerEvents, ServerToClientEvents } from './types'
 const app = express()
 const server = http.createServer(app)
 const port = process.env.PORT || 3000
@@ -20,7 +20,7 @@ io.on('connection', (socket) => {
   socket.on('joinRoom', (req) => {
     const { roomID, userName } = req
     socket.join(roomID)
-    io.to(roomID).emit('joinRoom', { userName })
+    io.to(roomID).emit('joinRoom', { userName, roomID })
   })
   socket.on('onReady', (req) => {
     const { roomID, userName } = req

@@ -1,6 +1,7 @@
 export interface ServerToClientEvents {
     joinRoom: (messageData:{
         userName: string,
+        roomID: string
     }) => void;
     onReady: (messageData:{
         userName: string,
