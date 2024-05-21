@@ -17,25 +17,25 @@ app.get('/', (req:Request, res:Response) => {
 
 io.on('connection', (socket) => {
   console.log('connecting')
-  socket.on('joinRoom', (res) => {
-    const { roomID, userName } = res
+  socket.on('joinRoom', (req) => {
+    const { roomID, userName } = req
     socket.join(roomID)
     io.to(roomID).emit('joinRoom', { userName })
   })
-  socket.on('onReady', (res) => {
-    const { roomID, userName } = res
+  socket.on('onReady', (req) => {
+    const { roomID, userName } = req
     io.to(roomID).emit('onReady', { roomID, userName })
   })
-  socket.on('start', (res) => {
-    const { roomID } = res
+  socket.on('start', (req) => {
+    const { roomID } = req
     io.to(roomID).emit('start', { message: 'starting' })
   })
-  socket.on('mora', (res) => {
-    const { roomID, mora, userName } = res
+  socket.on('mora', (req) => {
+    const { roomID, mora, userName } = req
     io.to(roomID).emit('mora', { roomID, mora, userName })
   })
 })
 
-server.listen(port, Number('0.0.0.0'), () => {
+server.listen(port, () => {
   console.log(`listening on *:${port}`)
 })
