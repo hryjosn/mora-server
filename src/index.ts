@@ -20,7 +20,7 @@ io.on('connection', (socket) => {
   socket.on('joinRoom', (res) => {
     const { roomID, userName } = res
     socket.join(roomID)
-    io.to(roomID).emit('joinRoom', { userName })
+    io.to(roomID).emit('joinRoom', { userName, roomID })
   })
   socket.on('onReady', (res) => {
     const { roomID, userName } = res
