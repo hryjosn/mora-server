@@ -1,8 +1,8 @@
-import { Server } from 'socket.io'
+import 'dotenv/config'
 import express, { Request, Response } from 'express'
 import http from 'http'
-import { ServerToClientEvents, ClientToServerEvents } from './types'
-import 'dotenv/config'
+import { Server } from 'socket.io'
+import { ClientToServerEvents, ServerToClientEvents } from './types'
 const app = express()
 const server = http.createServer(app)
 const port = process.env.PORT || 3000
@@ -36,6 +36,6 @@ io.on('connection', (socket) => {
   })
 })
 
-server.listen(port, Number('0.0.0.0'), () => {
+server.listen(port,  () => {
   console.log(`listening on *:${port}`)
 })
