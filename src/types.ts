@@ -15,6 +15,10 @@ export interface ServerToClientEvents {
         roomID: string,
         mora: string
     }) => void;
+    broadcast: (messageData:{
+        userName: string,
+        roomID: string,
+    }) => void;
   }
 
 export interface ClientToServerEvents {
@@ -35,5 +39,9 @@ export interface ClientToServerEvents {
         userName: string,
         roomID: string,
         mora: string
+    }) => void;
+    broadcast: (messageData:{
+        userName: string,
+        roomID: string,
     }) => void;
   }

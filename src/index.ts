@@ -26,6 +26,10 @@ io.on('connection', (socket) => {
     const { roomID, userName } = req
     io.to(roomID).emit('onReady', { roomID, userName })
   })
+  socket.on('broadcast', (req) => {
+    const { roomID } = req
+    io.to(roomID).emit('broadcast', req)
+  })
   socket.on('start', (req) => {
     const { roomID } = req
     io.to(roomID).emit('start', { message: 'starting' })
