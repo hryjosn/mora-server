@@ -20,6 +20,7 @@ io.on('connection', (socket) => {
   socket.on('joinRoom', (req) => {
     const { roomID } = req
     socket.join(roomID)
+    io.to(roomID).emit('joinRoom', req)
   })
   socket.on('onReady', (req) => {
     const { roomID, userName } = req
