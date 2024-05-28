@@ -18,17 +18,16 @@ app.get('/', (req:Request, res:Response) => {
 io.on('connection', (socket) => {
   console.log('connecting')
   socket.on('joinRoom', (req) => {
-    const { roomID, userName } = req
+    const { roomID } = req
     socket.join(roomID)
-    io.to(roomID).emit('joinRoom', { userName, roomID })
   })
   socket.on('onReady', (req) => {
     const { roomID, userName } = req
     io.to(roomID).emit('onReady', { roomID, userName })
   })
-  socket.on('broadcast', (req) => {
+  socket.on('userJoin', (req) => {
     const { roomID } = req
-    io.to(roomID).emit('broadcast', req)
+    io.to(roomID).emit('userJoin', req)
   })
   socket.on('start', (req) => {
     const { roomID } = req

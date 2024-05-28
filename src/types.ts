@@ -15,7 +15,7 @@ export interface ServerToClientEvents {
         roomID: string,
         mora: string
     }) => void;
-    broadcast: (messageData:{
+    userJoin: (messageData:{
         userName: string,
         roomID: string,
     }) => void;
@@ -40,7 +40,7 @@ export interface ClientToServerEvents {
         roomID: string,
         mora: string
     }) => void;
-    broadcast: (messageData:{
+    userJoin: (messageData:{
         userName: string,
         roomID: string,
     }) => void;
