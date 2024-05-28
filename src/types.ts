@@ -1,6 +1,5 @@
 export interface ServerToClientEvents {
     joinRoom: (messageData:{
-        userName: string,
         roomID: string
     }) => void;
     onReady: (messageData:{
@@ -24,7 +23,6 @@ export interface ServerToClientEvents {
 export interface ClientToServerEvents {
     join: (roomId:string) => void;
     joinRoom: (messageData:{
-        userName: string,
         roomID: string,
     }) => void;
     onReady: (messageData:{
